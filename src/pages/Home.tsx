@@ -1,11 +1,28 @@
 import { useState } from "react";
 import { useGetOompaLoompasQuery } from "../service/oompaLoompaApi";
 import OompaLoompaItem from "../components/OompaLoompaItem";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [page, setPage] = useState(1);
-  const { data, isError, isLoading } = useGetOompaLoompasQuery(page);
-  console.log(data, isError, isLoading);
+  const { data: oompaLoompaResponse, isLoading } =
+    useGetOompaLoompasQuery(page);
+
+  if (
+    oompaLoompaResponse &&
+    Object.prototype.hasOwnProperty.call(oompaLoompaResponse, "stackTrace")
+  ) {
+    return (
+      <div className="flex flex-col items-center gap-4">
+        <p className="text-xl sm:text-3xl text-slate-800">
+          ❌ No existe esta pagina Ommpa Loompa
+        </p>
+        <Link className="block text-xl sm:text-2xl text-indigo-500" to="/">
+          Vuelve a la pagina inicial ⬅️
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <main>
@@ -18,15 +35,17 @@ export default function Home() {
       ) : (
         <section className="flex justify-center mx-4 m-auto md:max-w-[900px] lg:max-w-[1200px]">
           <div className="mx-4 w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-4">
-            {data && data?.results.map((oompaLoompa) => (
-              <OompaLoompaItem oompaLoompa={oompaLoompa}  />
-            ))}
+            {oompaLoompaResponse &&
+              oompaLoompaResponse?.results.map((oompaLoompa) => (
+                <OompaLoompaItem oompaLoompa={oompaLoompa} />
+              ))}
           </div>
         </section>
       )}
-      {data && data.current < data.total && (
-        <button onClick={() => setPage((page) => page + 1)}>Load more</button>
-      )}
+      {oompaLoompaResponse &&
+        oompaLoompaResponse.current < oompaLoompaResponse.total && (
+          <button onClick={() => setPage((page) => page + 1)}>Load more</button>
+        )}
     </main>
   );
 }
