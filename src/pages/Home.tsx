@@ -36,6 +36,8 @@ export default function Home() {
       }
     }, options);
     if (fetchingElement.current) observer.observe(fetchingElement.current);
+
+    return () => observer.disconnect();
   }, [isSuccess]);
 
   // Error handling, I can't use the isError property from RTK Query because when is failing the request the data is not undefined, that's why I'm using the stackTrace property to check if the request is failing
