@@ -47,6 +47,20 @@ export const oompaLoompaApi = createApi({
     endpoints: (builder) => ({
         getOompaLoompas: builder.query<OompaLoompaListResponse, number>({
             query: (page: number) => `?page=${page}`,
+            serializeQueryArgs: ({ endpointName }) => {
+                return endpointName;
+            },
+            merge: (currentCache, newItems) => {
+                currentCache.results.push(...newItems.results);
+                currentCache.current = newItems.current;
+                currentCache.total = newItems.total;
+            },
+            forceRefetch({ currentArg, previousArg }) {
+                if (currentArg === undefined || previousArg === undefined) return true;
+                if (currentArg < previousArg) return false
+                if(currentArg === previousArg) return false
+                return true;
+            },
             providesTags: ["OompaLoompa"],
         }),
         getOompaLoompa: builder.query<OompaLoompaOnDetail, string>({

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useGetOompaLoompasQuery } from "../service/oompaLoompaApi";
 import OompaLoompaItem from "../components/OompaLoompaItem";
 import { Link } from "react-router-dom";
@@ -6,14 +6,18 @@ import { Link } from "react-router-dom";
 export default function Home() {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
-  const { data: oompaLoompaResponse, isLoading } =
-    useGetOompaLoompasQuery(page);
+  const fetchingElement = useRef<HTMLDivElement>(null);
+  const {
+    data: oompaLoompaResponse,
+    isLoading,
+    isSuccess,
+  } = useGetOompaLoompasQuery(page);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setSearch(e.target.value);
   };
-  
+
   const filteredOompaLoompas = oompaLoompaResponse?.results.filter(
     (oompaLoompa) => {
       return `${oompaLoompa.first_name} ${oompaLoompa.last_name} ${oompaLoompa.profession}`
@@ -21,6 +25,26 @@ export default function Home() {
         .includes(search.toLowerCase());
     }
   );
+
+  useEffect(() => {
+    if (oompaLoompaResponse?.current) {
+      setPage(oompaLoompaResponse.current);
+    }
+  }, [oompaLoompaResponse]);
+
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: "100px",
+      threshold: 1.0,
+    };
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && isSuccess) {
+        setPage((page) => page + 1);
+      }
+    }, options);
+    if (fetchingElement.current) observer.observe(fetchingElement.current);
+  }, [isSuccess]);
 
   // Error handling, I can't use the isError property from RTK Query because when is failing the request the data is not undefined, that's why I'm using the stackTrace property to check if the request is failing
   if (
@@ -79,7 +103,7 @@ export default function Home() {
       )}
       {oompaLoompaResponse &&
         oompaLoompaResponse.current < oompaLoompaResponse.total && (
-          <button onClick={() => setPage((page) => page + 1)}>Load more</button>
+          <div ref={fetchingElement} />
         )}
     </main>
   );
