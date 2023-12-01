@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import type { OompaLoompaOnList } from "../service/oompaLoompaApi";
+import type { OompaLoompaOnList } from "@/service/oompaLoompaApi";
 
 interface OompaLoompaItemProps {
   oompaLoompa: OompaLoompaOnList;

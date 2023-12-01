@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Header from "./components/Header";
-import OompaLoompa from "./pages/OompaLoompa";
+import Home from "@/pages/Home";
+import OompaLoompa from "@/pages/OompaLoompa";
+import NavBar from "@/components/NavBar";
 function App() {
   return (
     <BrowserRouter>
-      <Header />
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/:id" element={<OompaLoompa />} />

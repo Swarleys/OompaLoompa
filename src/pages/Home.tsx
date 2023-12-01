@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { useGetOompaLoompasQuery } from "../service/oompaLoompaApi";
-import OompaLoompaItem from "../components/OompaLoompaItem";
-import { Link } from "react-router-dom";
+import { useGetOompaLoompasQuery } from "@/service/oompaLoompaApi";
+import OompaLoompaItem from "@/components/OompaLoompaItem";
+import Error from "@/components/Error";
 
 export default function Home() {
   const [page, setPage] = useState(1);
@@ -17,14 +17,6 @@ export default function Home() {
     e.preventDefault();
     setSearch(e.target.value);
   };
-
-  const filteredOompaLoompas = oompaLoompaResponse?.results.filter(
-    (oompaLoompa) => {
-      return `${oompaLoompa.first_name} ${oompaLoompa.last_name} ${oompaLoompa.profession}`
-        .toLowerCase()
-        .includes(search.toLowerCase());
-    }
-  );
 
   useEffect(() => {
     if (oompaLoompaResponse?.current) {
@@ -51,22 +43,24 @@ export default function Home() {
     oompaLoompaResponse &&
     Object.prototype.hasOwnProperty.call(oompaLoompaResponse, "stackTrace")
   ) {
-    return (
-      <div className="flex flex-col items-center gap-4">
-        <p className="text-xl sm:text-3xl text-slate-800">
-          ❌ No existe esta pagina Ommpa Loompa
-        </p>
-        <Link className="block text-xl sm:text-2xl text-indigo-500" to="/">
-          Vuelve a la pagina inicial ⬅️
-        </Link>
-      </div>
-    );
+    return <Error />;
   }
+
+  const filteredOompaLoompas = oompaLoompaResponse?.results.filter(
+    (oompaLoompa) => {
+      return `${oompaLoompa.first_name} ${oompaLoompa.last_name} ${oompaLoompa.profession}`
+        .toLowerCase()
+        .includes(search.toLowerCase());
+    }
+  );
 
   return (
     <main>
-      <header className="flex flex-col justify-center items-center gap-4 mb-12 md:max-w-[900px] lg:max-w-[1200px] m-auto">
-        <search role="search" className="self-end mr-4">
+      <header className="flex flex-col justify-center items-center gap-4 mb-6 sm:mb-12 md:max-w-[900px] lg:max-w-[1200px] m-auto">
+        <search
+          role="search"
+          className="self-start ml-4 sm:ml-0 sm:self-end sm:mr-4 w-72 "
+        >
           <form
             onSubmit={(e) => e.preventDefault()}
             className="flex flex-col gap 4px"
@@ -83,11 +77,17 @@ export default function Home() {
             />
           </form>
         </search>
-        <h1 className="text-6xl text-slate-700">Find your Oompa Loompa</h1>
-        <h2 className="text-4xl text-slate-500">There are more than 100k</h2>
+        <h1 className="text-2xl sm:text-4xl md:text-6xl text-slate-700">
+          Find your Oompa Loompa
+        </h1>
+        <h2 className="text-xl sm:text-3xl md:text-4xl text-slate-500">
+          There are more than 100k
+        </h2>
       </header>
       {isLoading ? (
-        <div>Cargando resultados...</div>
+        <div className="flex m-auto md:max-w-[900px] lg:max-w-[1200px]">
+          <p className="mx-4">Loading results...</p>
+        </div>
       ) : (
         <section className="flex m-auto md:max-w-[900px] lg:max-w-[1200px]">
           <div className="mx-4 w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-4">

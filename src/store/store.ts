@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { oompaLoompaApi } from '../service/oompaLoompaApi';
+import { oompaLoompaApi } from '@/service/oompaLoompaApi';
 
 export const store = configureStore({
     reducer: {

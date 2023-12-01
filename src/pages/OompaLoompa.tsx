@@ -1,33 +1,30 @@
-import { Link, useParams } from "react-router-dom";
-import { useGetOompaLoompaQuery } from "../service/oompaLoompaApi";
+import { useParams } from "react-router-dom";
+import { useGetOompaLoompaQuery } from "@/service/oompaLoompaApi";
+import Error from "@/components/Error";
 
 export default function OompaLoompa() {
   const { id } = useParams();
   const { data: oompaLoompa, isLoading } = useGetOompaLoompaQuery(id as string);
 
+  // Error handling, I can't use the isError property from RTK Query because when is failing the request the data is not undefined, that's why I'm using the stackTrace property to check if the request is failing
   if (
     oompaLoompa &&
     Object.prototype.hasOwnProperty.call(oompaLoompa, "stackTrace")
   ) {
-    return (
-      <div className="flex flex-col items-center gap-4">
-        <p className="text-xl sm:text-3xl text-slate-800">
-          ❌ No existe este Ommpa Loompa
-        </p>
-        <Link className="block text-xl sm:text-2xl text-indigo-500" to="/">
-          Vuelve a la pagina inicial ⬅️
-        </Link>
-      </div>
-    );
+    return <Error />;
   }
 
   return (
-    <>
-      {isLoading && <div>Cargando Oompa Loompa...</div>}
+    <div className="flex items-center md:max-w-[900px] lg:max-w-[1200px] m-auto">
+      {isLoading && (
+        <div className="flex self-start w-full text-left">
+          <p className="mx-4">Oompa Loompa Loading...</p>
+        </div>
+      )}
       {oompaLoompa && (
-        <div className="grid md:grid-cols-2 gap-5">
-          <img src={oompaLoompa.image} alt={oompaLoompa.first_name} />
-          <div className="flex flex-col justify-between">
+        <div className="grid md:grid-cols-2 gap-5 mx-4">
+          <img src={oompaLoompa.image} width={574} height={430} alt={oompaLoompa.first_name} />
+          <div className="flex flex-col gap-10">
             <div className="space-y-2">
               <p className="text-2xl text-slate-800">
                 {oompaLoompa.first_name} {oompaLoompa.last_name}
@@ -43,6 +40,6 @@ export default function OompaLoompa() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
