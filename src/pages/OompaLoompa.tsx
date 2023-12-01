@@ -26,9 +26,9 @@ export default function OompaLoompa() {
           <img src={oompaLoompa.image} width={574} height={430} alt={oompaLoompa.first_name} />
           <div className="flex flex-col gap-10">
             <div className="space-y-2">
-              <p className="text-2xl text-slate-800">
+              <h1 className="text-2xl text-slate-800">
                 {oompaLoompa.first_name} {oompaLoompa.last_name}
-              </p>
+              </h1>
               <p className="text-slate-500">
                 {oompaLoompa.gender === "F" ? "Woman" : "Man"}
               </p>

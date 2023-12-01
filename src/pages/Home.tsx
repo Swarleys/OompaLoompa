@@ -98,7 +98,7 @@ export default function Home() {
         </div>
       ) : (
         <section className="flex m-auto md:max-w-[900px] lg:max-w-[1200px]">
-          <div className="mx-4 w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-4">
+          <ul className="mx-4 w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-4">
             {filteredOompaLoompas &&
               filteredOompaLoompas?.map((oompaLoompa) => (
                 <OompaLoompaItem
@@ -106,7 +106,7 @@ export default function Home() {
                   oompaLoompa={oompaLoompa}
                 />
               ))}
-          </div>
+          </ul>
         </section>
       )}
       {oompaLoompaResponse &&
