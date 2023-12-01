@@ -10,7 +10,7 @@ export default function OompaLoompaItem({ oompaLoompa }: OompaLoompaItemProps) {
     <Link
       to={`/${oompaLoompa.id}`}
       key={oompaLoompa.id}
-      className="mx-auto max-w-[400px] "
+      className="mx-auto max-w-[400px] [&>img+p]:hover:text-cyan-500 "
     >
       <img
         src={oompaLoompa.image}

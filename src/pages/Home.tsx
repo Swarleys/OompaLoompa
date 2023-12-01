@@ -65,7 +65,7 @@ export default function Home() {
         >
           <form
             onSubmit={(e) => e.preventDefault()}
-            className="flex flex-col gap 4px"
+            className="flex flex-col gap 4px relative"
           >
             <input
               type="search"
@@ -73,9 +73,15 @@ export default function Home() {
               value={search}
               id="search"
               name="search"
-              className="border border-gray-300 rounded-md p-2"
+              className="border-2 border-gray-400 rounded-md p-2"
               aria-label="Busqueda de Oompa Loompas"
               placeholder="Busqueda de Oompa..."
+            />
+            <img
+              src="https://s3.eu-central-1.amazonaws.com/napptilus/level-test/imgs/ic_search.png"
+              alt="Search icon"
+              width={30}
+              className="absolute top-[11px] right-3 border-l-2 border-gray-400  pl-2 "
             />
           </form>
         </search>
