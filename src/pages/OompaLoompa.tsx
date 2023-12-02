@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useGetOompaLoompaQuery } from "@/service/oompaLoompaApi";
-import Error from "@/components/Error";
+import Error from "@/components/Error/Error";
 
 export default function OompaLoompa() {
   const { id } = useParams();

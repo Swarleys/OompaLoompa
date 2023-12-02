@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "@/pages/Home";
 import OompaLoompa from "@/pages/OompaLoompa";
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/NavBar/NavBar";
 function App() {
   return (
     <BrowserRouter>

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useGetOompaLoompasQuery } from "@/service/oompaLoompaApi";
-import OompaLoompaItem from "@/components/OompaLoompaItem";
-import Error from "@/components/Error";
+import OompaLoompaItem from "@/components/OompaLoompaItem/OompaLoompaItem";
+import Error from "@/components/Error/Error";
 
 export default function Home() {
   const [page, setPage] = useState(1);
