@@ -16,11 +16,11 @@ describe("OompaLoompa page", () => {
       </Provider>
     );
 
-    const name = await screen.findByRole("heading", { name: /Marcy/i });
+    const name = await screen.findByRole("heading", { name: /Esteban/i });
     expect(name).toBeDefined();
-    const profession = await screen.getByText(/Developer/i);
+    const profession = await screen.getByText(/Frontend/i);
     expect(profession).toBeDefined();
-    const gender = await screen.getByText(/Woman/i);
+    const gender = await screen.getByText(/Man/i);
     expect(gender).toBeDefined();
   });
   
@@ -35,9 +35,9 @@ describe("OompaLoompa page", () => {
       </Provider>
     );
 
-    const name = await screen.findByRole("heading", { name: /Cowin/i });
+    const name = await screen.findByRole("heading", { name: /Dinozzo/i });
     expect(name).toBeDefined();
-    const profession = await screen.getByText(/Metalworker/i);
+    const profession = await screen.getByText(/developer/i);
     expect(profession).toBeDefined();
     const gender = await screen.getByText(/man/i);
     expect(gender).toBeDefined();

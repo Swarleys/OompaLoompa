@@ -25,16 +25,16 @@ describe("Home page", () => {
   });
   test("renders Home component with initials Oompa Loompas", async () => {
     const initialOompaLoompas = await screen.findAllByRole("listitem");
-    expect(initialOompaLoompas).toHaveLength(25);
+    expect(initialOompaLoompas).toHaveLength(2);
   });
 
   test("updates search states and filters Oompa Loompas", async () => {
     const input = screen.getByPlaceholderText(/Busqueda/i);
-    fireEvent.change(input, { target: { value: "Evang" } });
+    fireEvent.change(input, { target: { value: "Esteban" } });
     const filteredEvang = await screen.findAllByRole("listitem");
     expect(filteredEvang).toHaveLength(1);
-    expect(filteredEvang).not.toHaveLength(25);
-    fireEvent.change(input, { target: { value: "Esteban" } });
+    expect(filteredEvang).not.toHaveLength(2);
+    fireEvent.change(input, { target: { value: "Pokemon" } });
     const filteredEsteban = await screen.queryAllByRole("listitem");
     expect(filteredEsteban).toHaveLength(0);
     expect(filteredEsteban).not.toHaveLength(1);
