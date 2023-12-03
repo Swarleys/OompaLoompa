@@ -5,7 +5,7 @@ import { store } from "@/store/store";
 import OompaLoompa from "./OompaLoompa";
 
 describe("OompaLoompa page", () => {
-  beforeEach(() => {
+  test("renders OompaLoompa with id 1", async () => {
     render(
       <Provider store={store}>
         <MemoryRouter initialEntries={["/1"]}>
@@ -15,14 +15,31 @@ describe("OompaLoompa page", () => {
         </MemoryRouter>
       </Provider>
     );
-  });
 
-  test("renders OompaLoompa with details", async () => {
     const name = await screen.findByRole("heading", { name: /Marcy/i });
     expect(name).toBeDefined();
     const profession = await screen.getByText(/Developer/i);
     expect(profession).toBeDefined();
     const gender = await screen.getByText(/Woman/i);
+    expect(gender).toBeDefined();
+  });
+  
+  test("renders OompaLoompa with id 2", async () => {
+    render(
+      <Provider store={store}>
+        <MemoryRouter initialEntries={["/2"]}>
+          <Routes>
+            <Route path="/:id" element={<OompaLoompa />} />
+          </Routes>
+        </MemoryRouter>
+      </Provider>
+    );
+
+    const name = await screen.findByRole("heading", { name: /Cowin/i });
+    expect(name).toBeDefined();
+    const profession = await screen.getByText(/Metalworker/i);
+    expect(profession).toBeDefined();
+    const gender = await screen.getByText(/man/i);
     expect(gender).toBeDefined();
   });
 });
