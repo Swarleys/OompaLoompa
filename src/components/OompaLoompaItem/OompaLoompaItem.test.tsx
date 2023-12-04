@@ -51,7 +51,10 @@ describe("OompaLoompaItem component", () => {
     expect(() => {
       render(
         <Router>
-          <OompaLoompaItem />
+          <OompaLoompaItem
+            // @ts-expect-error Testing error
+            oompaLoompa
+          />
         </Router>
       );
     }).toThrow();

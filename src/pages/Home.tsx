@@ -74,8 +74,8 @@ export default function Home() {
               id="search"
               name="search"
               className="border-2 border-gray-400 rounded-md p-2"
-              aria-label="Busqueda de Oompa Loompas"
-              placeholder="Busqueda de Oompa..."
+              aria-label="Search of Oompa Loompas"
+              placeholder="Search Oompa..."
             />
             <img
               src="https://s3.eu-central-1.amazonaws.com/napptilus/level-test/imgs/ic_search.png"

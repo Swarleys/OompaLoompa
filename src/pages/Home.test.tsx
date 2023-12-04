@@ -29,7 +29,7 @@ describe("Home page", () => {
   });
 
   test("updates search states and filters Oompa Loompas", async () => {
-    const input = screen.getByPlaceholderText(/Busqueda/i);
+    const input = screen.getByPlaceholderText(/Search/i);
     fireEvent.change(input, { target: { value: "Esteban" } });
     const filteredEvang = await screen.findAllByRole("listitem");
     expect(filteredEvang).toHaveLength(1);
