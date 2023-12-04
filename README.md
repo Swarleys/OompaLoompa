@@ -12,13 +12,13 @@ I  developed the app with PNPM and with Node v18.17.1
 ```sh
 git@github.com:Swarleys/OompaLoompa.git
 ```
-1. - Install Packages, 
+2. - Install the Packages 
 
 ```sh
 pnpm install
 ```
 
-3. - Dev mode
+3A. - Dev mode
 
 ```sh
 pnpm dev
@@ -26,7 +26,7 @@ pnpm dev
 
 and open [http://localhost:5173](http://localhost:5173) 
 
-1. - Build
+3B. - Build
 ```sh 
 pnpm build
 pnpm preview
@@ -49,13 +49,25 @@ pnpm dev
 and then
 
 ```sh
-pnpm test:e2e or pnpm test:e2e:ui
+pnpm test:e2e
+```
+
+or
+
+```sh
+pnpm test:e2e:ui
 ```
 
 ### Unit Testing
 
 ```sh
-pnpm test or pnpm test:ui
+pnpm test
+```
+
+or 
+
+```sh
+pnpm test:ui
 ```
 
 ## Stack
