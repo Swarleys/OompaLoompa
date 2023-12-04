@@ -78,3 +78,7 @@ pnpm test:ui
 - [Redux](https://redux.js.org/)
 - [Redux Toolkit](https://redux-toolkit.js.org/)
 - [React Router](https://reactrouter.com/en/main)
+
+## Decisions
+
+I decided to use RTK Query for data fetching since is the [recommended](https://redux.js.org/style-guide/#use-rtk-query-for-data-fetching) for the Redux team, that decision let me to use the flag ***keepUnusedDataFor*** to cache the data for 24h, we need to specified in seconds, it will be cached only while the web is open, if you close the web or refreshit it will start to caching again. If we want to save the cache for 24h even when refreshing or closing/reopening the app we should use something like redux-persist, but it will need another package, and more code to mantain.
